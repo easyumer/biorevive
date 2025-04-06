@@ -99,7 +99,11 @@
             const mobileNavItems = document.querySelectorAll('.nav-item.has-mega-menu, .nav-item.has-dropdown');
             
             if (menuToggle) {
-                menuToggle.addEventListener('click', function() {
+                // Remove any existing click handlers first
+                menuToggle.removeEventListener('click', toggleMobileMenu);
+                
+                // Define the toggle function
+                function toggleMobileMenu() {
                     header.classList.toggle('menu-open');
                     document.body.classList.toggle('menu-active');
                     
@@ -109,6 +113,17 @@
                     } else {
                         document.body.style.overflow = '';
                     }
+                }
+                
+                // Add the click handler
+                menuToggle.addEventListener('click', toggleMobileMenu);
+                
+                // Also add keyboard accessibility
+                menuToggle.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleMobileMenu();
+                    }
                 });
             }
             
@@ -116,11 +131,15 @@
             mobileNavItems.forEach(item => {
                 const link = item.querySelector('.nav-link');
                 
-                if (link && window.innerWidth < 992) {
-                    link.addEventListener('click', function(e) {
+                if (link) {
+                    // Remove any existing listeners first
+                    link.removeEventListener('click', toggleSubmenu);
+                    
+                    function toggleSubmenu(e) {
                         // Only for mobile
                         if (window.innerWidth < 992) {
                             e.preventDefault();
+                            e.stopPropagation();
                             
                             // Toggle the specific submenu
                             const subMenu = item.querySelector('.mega-menu') || item.querySelector('.dropdown-menu');
@@ -136,9 +155,17 @@
                                 }
                             }
                         }
-                    });
+                    }
+                    
+                    // Add click handler
+                    link.addEventListener('click', toggleSubmenu);
                 }
             });
+            
+            // Make sure styles reflect the current state
+            if (header.classList.contains('menu-open')) {
+                document.body.style.overflow = 'hidden';
+            }
         }
         
         // Initialize menu hover effects

@@ -44,6 +44,9 @@
         /* Style for when mobile menu is active */
         body.menu-active {
             overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
         }
         
         /* Fix for iOS Safari's handling of vh units */
@@ -63,6 +66,10 @@
             }
             .hero-background, .hero-video, .hero-image {
                 height: 90vh !important;
+            }
+            /* Mobile menu toggle visibility */
+            .mobile-menu-toggle {
+                display: flex !important;
             }
         }
         

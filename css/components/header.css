@@ -132,6 +132,10 @@
     flex-direction: column;
     justify-content: space-between;
     z-index: 100;
+    cursor: pointer;
+    padding: 0;
+    background-color: transparent;
+    border: none;
 }
 
 .mobile-menu-toggle span {
@@ -139,6 +143,7 @@
     height: 2px;
     background-color: var(--color-white);
     transition: transform var(--transition-speed) ease, opacity var(--transition-speed) ease;
+    display: block;
 }
 
 /* Scrolled Header State */
@@ -201,7 +206,7 @@
     }
     
     .main-navigation {
-        display: none;
+        display: block; /* Always display, but initially hidden */
         position: fixed;
         top: 0;
         left: 0;
@@ -211,10 +216,17 @@
         padding: 100px 5% 40px;
         overflow-y: auto;
         z-index: 90;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
     }
     
     .site-header.menu-open .main-navigation {
         display: block;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
     }
     
     .nav-list {
@@ -234,6 +246,17 @@
     
     .mobile-menu-toggle {
         display: flex;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        position: relative;
+        z-index: 1010; /* Above the mobile navigation */
+    }
+    
+    /* Ensure toggle is visible on all header states */
+    .site-header.menu-visible .mobile-menu-toggle span {
+        background-color: #333333;
     }
     
     .site-header.menu-open .mobile-menu-toggle span:nth-child(1) {

@@ -441,20 +441,43 @@ h1, h2, h3, h4, h5, h6 {
         position: static;
         background-color: rgba(255, 255, 255, 0.1);
         box-shadow: none;
-        padding: 15px 0 15px 20px !important;
+        padding: 0 !important;
         max-height: 0;
         transform: none;
         border-radius: 0;
         width: 100%;
         overflow: hidden;
-        margin-top: 5px;
-        transition: max-height 0.3s ease, padding 0.3s ease;
+        margin-top: 0;
+        transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .nav-item.submenu-open .mega-menu,
+    .nav-item.submenu-open .dropdown-menu {
+        max-height: 1000px;
+        padding: 15px 0 15px 20px !important;
     }
     
     .has-mega-menu:hover .mega-menu,
     .has-dropdown:hover .dropdown-menu {
-        max-height: 1000px;
-        padding: 15px 0 15px 20px !important;
+        max-height: 0;
+        padding: 0 !important;
+    }
+    
+    .nav-item.submenu-open .nav-link {
+        color: var(--color-pink-medium);
+    }
+    
+    .nav-link:after {
+        content: "+";
+        margin-left: auto;
+        font-size: 20px;
+        transition: transform 0.3s ease;
+    }
+    
+    .submenu-open .nav-link:after {
+        content: "−";
     }
     
     .mega-menu-content {
