@@ -1,0 +1,118 @@
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: var(--border-radius);
+    font-family: var(--font-body);
+    font-size: var(--font-size-body);
+    font-weight: var(--weight-medium);
+    text-align: center;
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease,
+                color var(--transition-speed) ease,
+                transform var(--transition-speed) ease,
+                box-shadow var(--transition-speed) ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Primary Button - Dark variant */
+.btn-primary {
+    background-color: var(--color-cta-dark);
+    color: var(--color-white);
+    border: 1px solid var(--color-cta-dark);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-text-dark);
+}
+
+/* Primary Button - Pink variant */
+.btn-primary-pink {
+    background-color: var(--color-cta-pink);
+    color: var(--color-white);
+    border: 1px solid var(--color-cta-pink);
+}
+
+.btn-primary-pink:hover {
+    background-color: var(--color-pink-medium);
+}
+
+/* Secondary Button */
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-text-dark);
+    border: 1px solid var(--color-text-dark);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-text-dark);
+    color: var(--color-white);
+}
+
+/* Tertiary Button (Text button) */
+.btn-tertiary {
+    background-color: transparent;
+    color: var(--color-text-dark);
+    padding: 8px 0;
+    border-radius: 0;
+    border-bottom: 1px solid transparent;
+}
+
+.btn-tertiary:hover {
+    border-bottom-color: var(--color-text-dark);
+    transform: none;
+    box-shadow: none;
+}
+
+/* Button sizes */
+.btn-large {
+    padding: 16px 32px;
+    font-size: calc(var(--font-size-body) + 2px);
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: var(--font-size-small);
+}
+
+/* Specific button for Book Now CTA */
+.btn-book-now {
+    background-color: var(--color-cta-dark);
+    color: var(--color-white);
+    font-weight: var(--weight-medium);
+}
+
+.btn-book-now:hover {
+    background-color: var(--color-cta-pink);
+}
+
+/* Specific header buttons */
+.site-header .btn {
+    padding: 10px 20px;
+}
+
+/* Responsive styles */
+@media (max-width: 767px) {
+    .btn {
+        padding: 10px 20px;
+        font-size: var(--font-size-small);
+    }
+    
+    .btn-large {
+        padding: 12px 24px;
+        font-size: var(--font-size-body);
+    }
+    
+    .site-header .btn {
+        padding: 8px 16px;
+    }
+}

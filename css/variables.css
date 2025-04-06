@@ -1,0 +1,74 @@
+:root {
+    /* Primary Colors */
+    --color-dark: #1A1A1A;
+    --color-light: #E8E5E2;
+    --color-pink: #F8E2E2;
+    --color-teal: #E1F0F0;
+    
+    /* Secondary Colors */
+    --color-pink-medium: #F0C0C0;
+    --color-teal-medium: #B8D8D8;
+    --color-cream: #F0E6D9;
+    
+    /* Text Colors */
+    --color-white: #FFFFFF;
+    --color-off-white: #F9F7F7;
+    --color-text-dark: #333333;
+    --color-text-medium: #9B9B9B;
+    
+    /* UI Element Colors */
+    --color-cta-dark: #333333;
+    --color-cta-pink: #F0C0C0;
+    --color-hover: #C9B496;
+    
+    /* Fonts */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Poppins', sans-serif;
+    
+    /* Font Weights */
+    --weight-light: 300;
+    --weight-regular: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+    
+    /* Font Sizes - Desktop */
+    --font-size-main-title: 36px;
+    --font-size-section-title: 26px;
+    --font-size-body: 16px;
+    --font-size-small: 14px;
+    
+    /* Spacing */
+    --spacing-xs: 8px;
+    --spacing-s: 16px;
+    --spacing-m: 24px;
+    --spacing-l: 32px;
+    --spacing-xl: 48px;
+    --spacing-xxl: 80px;
+    
+    /* UI Elements */
+    --border-radius: 8px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --transition-speed: 0.3s;
+}
+
+/* Responsive Font Sizes */
+@media (max-width: 1023px) {
+    :root {
+        --font-size-main-title: 28px;
+        --font-size-section-title: 22px;
+        --font-size-body: 16px;
+        --font-size-small: 13px;
+        --spacing-xxl: 60px;
+    }
+}
+
+@media (max-width: 767px) {
+    :root {
+        --font-size-main-title: 24px;
+        --font-size-section-title: 20px;
+        --font-size-body: 15px;
+        --font-size-small: 12px;
+        --spacing-xxl: 40px;
+    }
+}

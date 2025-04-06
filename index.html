@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bio Revive - Medical Spa & Training Academy</title>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components/header.css">
+    <link rel="stylesheet" href="css/components/mega-menu.css">
+    <link rel="stylesheet" href="css/components/buttons.css">
+    <link rel="stylesheet" href="css/pages/home.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Override styles to fix white banner issue */
+        .site-main {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .hero-section {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+            height: 100vh !important;
+        }
+        .hero-background, .hero-video, .hero-image {
+            top: 0 !important;
+            height: 100vh !important;
+        }
+        .site-header {
+            background-color: rgba(26, 26, 26, 0.7) !important;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        /* Prevent horizontal scrolling on mobile */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+        /* Style for when mobile menu is active */
+        body.menu-active {
+            overflow: hidden;
+        }
+        
+        /* Fix for iOS Safari's handling of vh units */
+        @supports (-webkit-touch-callout: none) {
+            .hero-section {
+                height: -webkit-fill-available !important;
+            }
+            .hero-background, .hero-video, .hero-image {
+                height: -webkit-fill-available !important;
+            }
+        }
+        
+        /* Additional responsive fixes */
+        @media (max-width: 767px) {
+            .hero-section {
+                height: 90vh !important;
+            }
+            .hero-background, .hero-video, .hero-image {
+                height: 90vh !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-section {
+                height: 85vh !important;
+            }
+            .hero-background, .hero-video, .hero-image {
+                height: 85vh !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header" id="site-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img/logo/bio-revive-logo-light.png" alt="Bio Revive" class="logo-light">
+                    <img src="img/logo/bio-revive-logo-dark.png" alt="Bio Revive" class="logo-dark">
+                </a>
+            </div>
+            <nav class="main-navigation">
+                <ul class="nav-list">
+                    <li class="nav-item has-mega-menu">
+                        <a href="#" class="nav-link">Our Treatments +</a>
+                        <div class="mega-menu treatments-menu">
+                            <div class="mega-menu-container">
+                                <div class="mega-menu-content">
+                                    <div class="mega-menu-promo">
+                                        <h3>Find a Treatment for You</h3>
+                                        <div class="promo-image">
+                                            <img src="img/treatments/treatment-promo.jpg" alt="Bio Revive Treatments">
+                                        </div>
+                                    </div>
+                                    <div class="mega-menu-categories">
+                                        <div class="mega-menu-category">
+                                            <h4>Injectables & Fillers</h4>
+                                            <ul class="category-list">
+                                                <li><a href="#">BOTOX & Wrinkle Reducers</a></li>
+                                                <li><a href="#">JUVÉDERM</a></li>
+                                                <li><a href="#">Restylane</a></li>
+                                                <li><a href="#">RHA</a></li>
+                                                <li><a href="#">Kybella</a></li>
+                                                <li><a href="#">SKINVIVE</a></li>
+                                                <li><a href="#">PDO Threads</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="mega-menu-category">
+                                            <h4>Regenerative Treatments</h4>
+                                            <ul class="category-list">
+                                                <li><a href="#">Sculptra</a></li>
+                                                <li><a href="#">Radiesse</a></li>
+                                                <li><a href="#">Renuva</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="mega-menu-category">
+                                            <h4>Skin + Hair Treatments</h4>
+                                            <ul class="category-list">
+                                                <li><a href="#">PRP Injections, Microneedling, & Hair Restoration</a></li>
+                                                <li><a href="#">DiamondGlow</a></li>
+                                                <li><a href="#">Facials</a></li>
+                                                <li><a href="#">Chemical Peels</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="mega-menu-category">
+                                            <h4>Lasers & Devices</h4>
+                                            <ul class="category-list">
+                                                <li><a href="#">Microneedling</a></li>
+                                                <li><a href="#">Morpheus8</a></li>
+                                                <li><a href="#">Laser Resurfacing</a></li>
+                                                <li><a href="#">BBL</a></li>
+                                                <li><a href="#">Radiance Laser Packages</a></li>
+                                                <li><a href="#">CoolSculpting</a></li>
+                                                <li><a href="#">Laser Hair Removal</a></li>
+                                                <li><a href="#">Tattoo Removal</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="mega-menu-category">
+                                            <h4>Wellness</h4>
+                                            <ul class="category-list">
+                                                <li><a href="#">GLP-1 Protocol</a></li>
+                                                <li><a href="#">Advanced GLP-1 Protocol</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item has-mega-menu">
+                        <a href="#" class="nav-link">Academy +</a>
+                        <div class="mega-menu academy-menu">
+                            <div class="mega-menu-container">
+                                <div class="mega-menu-content">
+                                    <div class="mega-menu-promo">
+                                        <h3>Professional Training</h3>
+                                        <div class="promo-image">
+                                            <img src="img/academy/academy-promo.jpg" alt="Bio Revive Academy">
+                                        </div>
+                                    </div>
+                                    <div class="mega-menu-categories">
+                                        <div class="mega-menu-category wide-category">
+                                            <h4>Training Courses</h4>
+                                            <ul class="category-list">
+                                                <li><a href="#">Lash lift/Tint Course</a></li>
+                                                <li><a href="#">Eyelash Extension/brow lamination/lash lift combo Course</a></li>
+                                                <li><a href="#">Aesthetics and medical procedure</a></li>
+                                                <li><a href="#">Microblading & PMU Course</a></li>
+                                                <li><a href="#">Aam board certification</a></li>
+                                                <li><a href="#">Models Sign Up Form</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item has-dropdown">
+                        <a href="#" class="nav-link">Membership +</a>
+                        <div class="dropdown-menu">
+                            <ul class="dropdown-list">
+                                <li><a href="#">Lasers Membership</a></li>
+                                <li><a href="#">Botox and Fillers Membership</a></li>
+                                <li><a href="#">Eyelash Extension Membership</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item has-dropdown">
+                        <a href="#" class="nav-link">Locations +</a>
+                        <div class="dropdown-menu">
+                            <ul class="dropdown-list">
+                                <li><a href="#">Jersey City</a></li>
+                                <li><a href="#">Ridgewood, NJ</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item has-dropdown">
+                        <a href="#" class="nav-link">About +</a>
+                        <div class="dropdown-menu">
+                            <ul class="dropdown-list">
+                                <li><a href="#">Our Story</a></li>
+                                <li><a href="#">Our Team</a></li>
+                                <li><a href="#">Our Job Opportunities</a></li>
+                                <li><a href="#">Gift Cards</a></li>
+                                <li><a href="#">Our Blogs</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Payment Plans</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#" class="login-link">Login</a>
+                <a href="#" class="btn btn-primary">Book Now</a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+    <main class="site-main">
+        <section class="hero-section">
+            <div class="hero-background">
+                <video class="hero-video" autoplay muted loop playsinline>
+                    <source src="https://videos.pexels.com/video-files/4264879/4264879-uhd_2560_1440_30fps.mp4" type="video/mp4">
+                </video>
+                <div class="hero-image" style="background-image: url('img/hero/hero-treatment.jpg');"></div>
+                <div class="hero-overlay"></div>
+            </div>
+            
+            <div class="container">
+                <div class="hero-content">
+                    <!-- Main content container -->
+                    <div class="hero-text">
+                        <h1 class="hero-title">Radiate with Confidence</h1>
+                        <p class="hero-subtitle">Bio Revive's advanced aesthetic techniques deliver proven results that help you look and feel your best.</p>
+                        <div class="hero-cta">
+                            <a href="#" class="btn btn-primary btn-large">Book a Free Consultation</a>
+                            <a href="#" class="btn btn-outline btn-large">Explore Treatments</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Trust indicators -->
+                    <div class="hero-trust">
+                        <div class="trust-rating">
+                            <div class="star-rating" aria-label="5 out of 5 stars">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                            </div>
+                            <p class="rating-text">13,000+ 5-star reviews</p>
+                        </div>
+                        
+                        <div class="trust-badges">
+                            <div class="trust-badge">
+                                <div class="badge-icon">
+                                    <img src="img/icons/certified-icon.svg" alt="Certified Experts">
+                                </div>
+                                <p>Certified Medical Experts</p>
+                            </div>
+                            <div class="trust-badge">
+                                <div class="badge-icon">
+                                    <img src="img/icons/technology-icon.svg" alt="Advanced Technology">
+                                </div>
+                                <p>Advanced Technology</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Animated scroll indicator -->
+            <div class="scroll-indicator">
+                <div class="scroll-arrow"></div>
+                <span>Scroll to explore</span>
+            </div>
+            
+            <!-- Floating treatment quick access -->
+            <div class="treatment-quick-access">
+                <div class="quick-access-title">Popular Treatments</div>
+                <div class="quick-access-items">
+                    <a href="#" class="quick-item">
+                        <div class="quick-item-icon">
+                            <img src="img/icons/botox-icon.svg" alt="Botox">
+                        </div>
+                        <span>Botox</span>
+                    </a>
+                    <a href="#" class="quick-item">
+                        <div class="quick-item-icon">
+                            <img src="img/icons/filler-icon.svg" alt="Fillers">
+                        </div>
+                        <span>Fillers</span>
+                    </a>
+                    <a href="#" class="quick-item">
+                        <div class="quick-item-icon">
+                            <img src="img/icons/facial-icon.svg" alt="Facials">
+                        </div>
+                        <span>Facials</span>
+                    </a>
+                    <a href="#" class="quick-item">
+                        <div class="quick-item-icon">
+                            <img src="img/icons/laser-icon.svg" alt="Laser">
+                        </div>
+                        <span>Laser</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional homepage content will go here -->
+    </main>
+
+    <!-- JavaScript Files -->
+    <script src="js/utils/scroll.js"></script>
+    <script src="js/components/megaMenu.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

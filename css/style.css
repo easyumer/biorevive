@@ -1,0 +1,263 @@
+/**
+ * Bio Revive Main Stylesheet
+ * Contains global styles and layout definitions
+ */
+
+/* Base reset */
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Base Layout Structure */
+.container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.section {
+    padding: var(--spacing-xxl) 0;
+}
+
+.section-heading {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-main-title);
+    font-weight: var(--weight-regular);
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.section-subheading {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-section-title);
+    font-weight: var(--weight-regular);
+    margin-bottom: var(--spacing-m);
+}
+
+/* Site Main Content */
+.site-main {
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+/* Responsive grid and utilities */
+@media (max-width: 1600px) {
+    .container {
+        max-width: 1400px;
+    }
+}
+
+@media (max-width: 1366px) {
+    .container {
+        max-width: 1200px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .grid-4 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .container {
+        max-width: 1000px;
+    }
+    
+    .section-heading {
+        font-size: calc(var(--font-size-main-title) * 0.9);
+    }
+}
+
+@media (max-width: 992px) {
+    .grid-3, .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .section {
+        padding: calc(var(--spacing-xxl) * 0.75) 0;
+    }
+    
+    .container {
+        padding: 0 4%;
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 767px) {
+    .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr;
+    }
+    
+    .section {
+        padding: calc(var(--spacing-xxl) * 0.5) 0;
+    }
+    
+    .section-heading {
+        font-size: calc(var(--font-size-main-title) * 0.8);
+        margin-bottom: var(--spacing-l);
+    }
+    
+    .container {
+        padding: 0 5%;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-heading {
+        font-size: calc(var(--font-size-main-title) * 0.7);
+    }
+    
+    .section-subheading {
+        font-size: calc(var(--font-size-section-title) * 0.9);
+    }
+    
+    .container {
+        padding: 0 4%;
+    }
+}
+
+/* Text Utilities */
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Flex Utilities */
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.align-start {
+    align-items: flex-start;
+}
+
+/* Grid Layout */
+.grid {
+    display: grid;
+    gap: var(--spacing-m);
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Spacing Utilities */
+.mb-xs {
+    margin-bottom: var(--spacing-xs);
+}
+
+.mb-s {
+    margin-bottom: var(--spacing-s);
+}
+
+.mb-m {
+    margin-bottom: var(--spacing-m);
+}
+
+.mb-l {
+    margin-bottom: var(--spacing-l);
+}
+
+.mb-xl {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Visibility Utilities */
+.hidden {
+    display: none;
+}
+
+.hidden-mobile {
+    display: block;
+}
+
+.visible-mobile {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .hidden-mobile {
+        display: none;
+    }
+    
+    .visible-mobile {
+        display: block;
+    }
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Animation Classes */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Active States */
+.nav-link.active {
+    color: var(--color-pink-medium);
+}
