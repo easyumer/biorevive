@@ -99,11 +99,11 @@
             const mobileNavItems = document.querySelectorAll('.nav-item.has-mega-menu, .nav-item.has-dropdown');
             
             if (menuToggle) {
-                // Remove any existing click handlers first
-                menuToggle.removeEventListener('click', toggleMobileMenu);
-                
-                // Define the toggle function
-                function toggleMobileMenu() {
+                // Define the toggle function outside event listener
+                function toggleMobileMenu(e) {
+                    if (e) e.preventDefault(); // Prevent default behavior
+                    console.log('Menu toggle clicked'); // Debug log
+                    
                     header.classList.toggle('menu-open');
                     document.body.classList.toggle('menu-active');
                     
@@ -115,7 +115,16 @@
                     }
                 }
                 
-                // Add the click handler
+                // Remove existing listeners and add new ones
+                menuToggle.removeEventListener('click', toggleMobileMenu);
+                
+                // iOS sometimes requires touchstart for reliability
+                menuToggle.addEventListener('touchstart', function(e) {
+                    e.preventDefault(); // Prevent any default touch behavior
+                    toggleMobileMenu();
+                }, {passive: false});
+                
+                // Keep click for non-touch devices
                 menuToggle.addEventListener('click', toggleMobileMenu);
                 
                 // Also add keyboard accessibility
@@ -125,6 +134,15 @@
                         toggleMobileMenu();
                     }
                 });
+                
+                // Add touch event to the button's spans
+                menuToggle.querySelectorAll('span').forEach(span => {
+                    span.addEventListener('touchstart', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleMobileMenu();
+                    }, {passive: false});
+                });
             }
             
             // Add click handler for mobile submenu toggles
@@ -132,14 +150,12 @@
                 const link = item.querySelector('.nav-link');
                 
                 if (link) {
-                    // Remove any existing listeners first
-                    link.removeEventListener('click', toggleSubmenu);
-                    
                     function toggleSubmenu(e) {
                         // Only for mobile
                         if (window.innerWidth < 992) {
                             e.preventDefault();
                             e.stopPropagation();
+                            console.log('Submenu toggle clicked'); // Debug log
                             
                             // Toggle the specific submenu
                             const subMenu = item.querySelector('.mega-menu') || item.querySelector('.dropdown-menu');
@@ -157,8 +173,13 @@
                         }
                     }
                     
-                    // Add click handler
+                    // Remove any existing listeners
+                    link.removeEventListener('click', toggleSubmenu);
+                    link.removeEventListener('touchstart', toggleSubmenu);
+                    
+                    // Add both click and touch events
                     link.addEventListener('click', toggleSubmenu);
+                    link.addEventListener('touchstart', toggleSubmenu, {passive: false});
                 }
             });
             

@@ -59,6 +59,24 @@
             }
         }
         
+        /* iOS-specific fixes for the mobile menu toggle */
+        .mobile-menu-toggle {
+            -webkit-tap-highlight-color: transparent !important;
+            touch-action: manipulation !important;
+        }
+        
+        /* Fix for iOS Safari's handling of fixed position elements */
+        @supports (-webkit-touch-callout: none) {
+            .site-header.menu-open .main-navigation {
+                height: 100vh;
+                height: -webkit-fill-available;
+                position: fixed;
+                top: 0;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+        
         /* Additional responsive fixes */
         @media (max-width: 767px) {
             .hero-section {
@@ -228,7 +246,7 @@
                 <a href="#" class="login-link">Login</a>
                 <a href="#" class="btn btn-primary">Book Now</a>
             </div>
-            <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+            <button type="button" class="mobile-menu-toggle" aria-label="Toggle Menu" id="mobile-menu-toggle">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -333,5 +351,43 @@
     <script src="js/utils/scroll.js"></script>
     <script src="js/components/megaMenu.js"></script>
     <script src="js/main.js"></script>
+    
+    <!-- iOS Compatibility Script -->
+    <script>
+        // Direct iOS menu toggle handler
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('mobile-menu-toggle');
+            const header = document.getElementById('site-header');
+            
+            if (menuToggle) {
+                // iOS-specific direct handler
+                function handleMenuToggle(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('iOS menu toggle clicked');
+                    
+                    header.classList.toggle('menu-open');
+                    document.body.classList.toggle('menu-active');
+                    
+                    if (header.classList.contains('menu-open')) {
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow = '';
+                    }
+                    
+                    return false;
+                }
+                
+                // Add multiple event listeners for iOS
+                menuToggle.addEventListener('touchend', handleMenuToggle, {passive: false});
+                menuToggle.addEventListener('click', handleMenuToggle, {passive: false});
+                
+                // For debugging
+                menuToggle.addEventListener('touchstart', function() {
+                    console.log('Touch started on menu toggle');
+                });
+            }
+        });
+    </script>
 </body>
 </html>

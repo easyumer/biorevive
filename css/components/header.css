@@ -131,11 +131,15 @@
     height: 25px;
     flex-direction: column;
     justify-content: space-between;
-    z-index: 100;
+    z-index: 1010; /* Increased z-index */
     cursor: pointer;
-    padding: 0;
+    padding: 10px; /* Larger touch target */
+    margin: -10px; /* Offset the padding */
     background-color: transparent;
     border: none;
+    -webkit-appearance: none; /* Fix for iOS */
+    appearance: none;
+    position: relative; /* Ensure it's properly positioned */
 }
 
 .mobile-menu-toggle span {
@@ -144,6 +148,7 @@
     background-color: var(--color-white);
     transition: transform var(--transition-speed) ease, opacity var(--transition-speed) ease;
     display: block;
+    pointer-events: none; /* Make sure the spans don't interfere with clicks */
 }
 
 /* Scrolled Header State */
