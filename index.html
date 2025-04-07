@@ -88,6 +88,38 @@
             /* Mobile menu toggle visibility */
             .mobile-menu-toggle {
                 display: flex !important;
+                width: 44px !important;
+                height: 40px !important;
+                position: relative !important;
+                margin-right: -8px !important;
+            }
+            
+            .mobile-menu-toggle span {
+                width: 100% !important;
+                height: 3px !important;
+                margin: 2px 0 !important;
+            }
+            
+            /* Add a transparent overlay to increase tap area */
+            .mobile-menu-toggle::after {
+                content: "" !important;
+                position: absolute !important;
+                top: -15px !important;
+                left: -15px !important;
+                right: -15px !important;
+                bottom: -15px !important;
+                z-index: -1 !important;
+            }
+            
+            /* Ensure transform works correctly on iOS */
+            .site-header.menu-open .mobile-menu-toggle span:nth-child(1) {
+                -webkit-transform: translateY(11px) rotate(45deg) !important;
+                transform: translateY(11px) rotate(45deg) !important;
+            }
+            
+            .site-header.menu-open .mobile-menu-toggle span:nth-child(3) {
+                -webkit-transform: translateY(-11px) rotate(-45deg) !important;
+                transform: translateY(-11px) rotate(-45deg) !important;
             }
         }
         
@@ -354,40 +386,165 @@
     
     <!-- iOS Compatibility Script -->
     <script>
-        // Direct iOS menu toggle handler
+        // Direct iOS menu toggle handler - completely rewritten for reliability
         document.addEventListener('DOMContentLoaded', function() {
+            // Get elements once and store for better performance
             const menuToggle = document.getElementById('mobile-menu-toggle');
             const header = document.getElementById('site-header');
+            let lastTapTime = 0; // To prevent double tap issues
             
-            if (menuToggle) {
-                // iOS-specific direct handler
-                function handleMenuToggle(e) {
+            if (!menuToggle || !header) return;
+            
+            // Single function to toggle menu state
+            function toggleMobileMenu(e) {
+                // Prevent default behavior for all events
+                if (e) {
                     e.preventDefault();
                     e.stopPropagation();
-                    console.log('iOS menu toggle clicked');
-                    
-                    header.classList.toggle('menu-open');
-                    document.body.classList.toggle('menu-active');
-                    
-                    if (header.classList.contains('menu-open')) {
-                        document.body.style.overflow = 'hidden';
-                    } else {
-                        document.body.style.overflow = '';
-                    }
-                    
-                    return false;
                 }
                 
-                // Add multiple event listeners for iOS
-                menuToggle.addEventListener('touchend', handleMenuToggle, {passive: false});
-                menuToggle.addEventListener('click', handleMenuToggle, {passive: false});
+                // Simple debounce to prevent multiple rapid toggles
+                const now = new Date().getTime();
+                const timeSinceLastTap = now - lastTapTime;
+                if (timeSinceLastTap < 300) return; // Ignore taps too close together
+                lastTapTime = now;
                 
-                // For debugging
-                menuToggle.addEventListener('touchstart', function() {
-                    console.log('Touch started on menu toggle');
-                });
+                // Log action for debugging
+                console.log('Menu toggle activated', e ? e.type : 'direct call');
+                
+                // Toggle menu state
+                const isCurrentlyOpen = header.classList.contains('menu-open');
+                
+                if (isCurrentlyOpen) {
+                    // Close menu
+                    header.classList.remove('menu-open');
+                    document.body.classList.remove('menu-active');
+                    document.body.style.overflow = '';
+                } else {
+                    // Open menu
+                    header.classList.add('menu-open');
+                    document.body.classList.add('menu-active');
+                    document.body.style.overflow = 'hidden';
+                }
             }
+            
+            // Clear any existing listeners first (important on hot reloads)
+            const newToggle = menuToggle.cloneNode(true);
+            menuToggle.parentNode.replaceChild(newToggle, menuToggle);
+            
+            // Add all possible event types for maximum compatibility
+            newToggle.addEventListener('click', toggleMobileMenu);
+            newToggle.addEventListener('touchstart', toggleMobileMenu, {passive: false});
+            
+            // Deliberately add a very short touch delay
+            newToggle.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                // This slight delay helps iOS register the tap better
+                setTimeout(function() {
+                    toggleMobileMenu(e);
+                }, 10);
+            }, {passive: false});
+            
+            // For screen readers and keyboard users
+            newToggle.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleMobileMenu(e);
+                }
+            });
+            
+            // Ensure button is visible
+            newToggle.style.display = 'flex';
+            
+            // Handle submenu toggles for iOS
+            setupSubmenuToggles();
         });
+        
+        // iOS-friendly submenu toggle handling
+        function setupSubmenuToggles() {
+            const submenuItems = document.querySelectorAll('.nav-item.has-mega-menu, .nav-item.has-dropdown');
+            
+            submenuItems.forEach(item => {
+                const link = item.querySelector('.nav-link');
+                if (!link) return;
+                
+                // Remove existing event listeners by cloning and replacing
+                const newLink = link.cloneNode(true);
+                link.parentNode.replaceChild(newLink, link);
+                
+                // Function to toggle submenu visibility
+                function toggleSubmenu(e) {
+                    // Only act on mobile
+                    if (window.innerWidth >= 992) return;
+                    
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    console.log('Submenu toggle clicked');
+                    
+                    // Toggle open class
+                    item.classList.toggle('submenu-open');
+                    
+                    // Get submenu element
+                    const submenu = item.querySelector('.mega-menu, .dropdown-menu');
+                    if (!submenu) return;
+                    
+                    // Set max-height and padding based on toggle state
+                    if (item.classList.contains('submenu-open')) {
+                        submenu.style.maxHeight = '2000px';
+                        submenu.style.padding = '15px 0 15px 20px';
+                    } else {
+                        submenu.style.maxHeight = '0';
+                        submenu.style.padding = '0';
+                    }
+                }
+                
+                // Add multiple event types for iOS compatibility
+                newLink.addEventListener('click', toggleSubmenu);
+                newLink.addEventListener('touchend', toggleSubmenu, {passive: false});
+            });
+        }
+    </script>
+    
+    <!-- Additional iOS Touch Fix -->
+    <script>
+        // Final iOS touch handling fixes
+        (function() {
+            // Fix for all buttons and interactive elements
+            document.addEventListener('touchstart', function() {
+                // This empty handler enables :active CSS states on iOS
+            }, {passive: true});
+            
+            // Load event for one final check
+            window.addEventListener('load', function() {
+                console.log('Page fully loaded - running final iOS checks');
+                
+                // Force rendering update on iOS
+                setTimeout(function() {
+                    window.scrollTo(0, 0);
+                    
+                    // Final check for menu toggle visibility
+                    var menuToggle = document.getElementById('mobile-menu-toggle');
+                    if (menuToggle && window.innerWidth < 992) {
+                        menuToggle.style.display = 'flex';
+                        
+                        // Add direct event listener as final backup
+                        menuToggle.onclick = function(e) {
+                            e.preventDefault();
+                            var header = document.getElementById('site-header');
+                            header.classList.toggle('menu-open');
+                            document.body.classList.toggle('menu-active');
+                            
+                            if (header.classList.contains('menu-open')) {
+                                document.body.style.overflow = 'hidden';
+                            } else {
+                                document.body.style.overflow = '';
+                            }
+                        };
+                    }
+                }, 100);
+            });
+        })();
     </script>
 </body>
 </html>

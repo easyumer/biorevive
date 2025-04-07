@@ -401,8 +401,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 992px) {
+    /* Mobile menu containers */
     .main-navigation {
-        display: none;
+        display: block;
         position: fixed;
         top: 0;
         left: 0;
@@ -412,8 +413,14 @@ h1, h2, h3, h4, h5, h6 {
         padding: 100px 5% 40px;
         overflow-y: auto;
         z-index: 90;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
     }
     
+    /* Mobile navigation items */
     .nav-list {
         flex-direction: column;
         gap: 15px;
@@ -425,17 +432,33 @@ h1, h2, h3, h4, h5, h6 {
     }
     
     .nav-link {
-        padding: 10px 0;
+        padding: 12px 0; /* Larger touch target */
         font-size: 18px;
         width: 100%;
         display: flex;
         justify-content: space-between;
+        min-height: 44px; /* iOS minimum touch target size */
+        align-items: center;
     }
     
-    .mobile-menu-toggle {
+    /* Submenu indicators and animation */
+    .nav-link:after {
+        content: "+";
+        margin-left: auto;
+        font-size: 24px; /* Larger indicator */
+        transition: transform 0.3s ease;
+        width: 44px; /* Ensure touch target size */
+        height: 44px;
         display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
+    .submenu-open .nav-link:after {
+        content: "−";
+    }
+    
+    /* Mobile submenu styling */
     .mega-menu,
     .dropdown-menu {
         position: static;
@@ -448,17 +471,28 @@ h1, h2, h3, h4, h5, h6 {
         width: 100%;
         overflow: hidden;
         margin-top: 0;
-        transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
+        transition: all 0.3s ease;
         opacity: 1;
         visibility: visible;
     }
     
+    /* Submenu links */
+    .category-list a, 
+    .dropdown-list li a {
+        padding: 12px 0; /* Larger touch targets */
+        min-height: 44px; /* iOS minimum touch target */
+        display: flex;
+        align-items: center;
+    }
+    
+    /* Open state styling for submenus */
     .nav-item.submenu-open .mega-menu,
     .nav-item.submenu-open .dropdown-menu {
-        max-height: 1000px;
+        max-height: 2000px; /* Increased to accommodate all content */
         padding: 15px 0 15px 20px !important;
     }
     
+    /* Override normal hover behavior for mobile */
     .has-mega-menu:hover .mega-menu,
     .has-dropdown:hover .dropdown-menu {
         max-height: 0;
@@ -469,17 +503,7 @@ h1, h2, h3, h4, h5, h6 {
         color: var(--color-pink-medium);
     }
     
-    .nav-link:after {
-        content: "+";
-        margin-left: auto;
-        font-size: 20px;
-        transition: transform 0.3s ease;
-    }
-    
-    .submenu-open .nav-link:after {
-        content: "−";
-    }
-    
+    /* Mega menu mobile content structure */
     .mega-menu-content {
         flex-direction: column;
         gap: 30px;
@@ -505,6 +529,7 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 16px;
     }
     
+    /* Header background in mobile */
     .site-header.menu-visible {
         background-color: #1A1A1A !important; 
     }
